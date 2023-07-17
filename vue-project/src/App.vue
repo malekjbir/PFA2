@@ -1,47 +1,33 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+<template>
+  <ul>
+    <li v-for="post in posts" :key="post.id">
+      {{ post.title }} - {{ post.content }} - {{ post.published }} - {{ post.authorId }}
+    </li>
+  </ul>
+  <p v-if="error">{{ error }}</p>
+</template>
+<script>
+import axios from 'axios';
+export default {
+  data() {
+    return {
+      posts: [],
+      error: null,
+    };
+  },
+  methods: {
+    async fetchPosts() {
+      try {
+        const response = await axios.get('https://3000-malekjbir-nestproject-gjqj2p1lu2x.ws-eu101.gitpod.io/findAllPosts');
+        this.posts = response.data;
+      } catch (error) {
+        this.error = error.message;
+      }
+    },
+  },
+  mounted() {
+    this.fetchPosts();
+  },
+};
 </script>
 
-<template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="Hello World" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
-</template>
-
-<style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
-</style>

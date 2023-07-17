@@ -1,0 +1,8 @@
+tasks:
+  - name: frontend
+    command: 
+      cd vue-project
+      yarn
+      docker-compose up -d --build
+      docker-compose logs -f
+  
