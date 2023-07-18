@@ -17,13 +17,15 @@ export default {
   methods: {
     async fetchPosts() {
       try {
-        console.log('aaaaaaa');
-        const data = await apiService.post.postControllerFindAll.then((response) => {
-          console.log('aaaaaaa', response?.data);
-          // this.posts = response?.data
+        console.log('debut');
+        const data = await apiService.post.postControllerFindAll().then((response) => {
+          console.log('aaaaaaa', response);
+          this.posts = response?.data
         })
+       
         console.log('data', data);
       } catch (error) {
+        console.log('error', error);
         this.error = error.message;
       }
     },
