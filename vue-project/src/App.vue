@@ -4,10 +4,9 @@
       {{ post.title }} - {{ post.content }} - {{ post.published }} - {{ post.authorId }}
     </li>
   </ul>
-  <p v-if="error">{{ error }}</p>
 </template>
 <script>
-import axios from 'axios';
+import apiService from './services'
 export default {
   data() {
     return {
@@ -18,15 +17,19 @@ export default {
   methods: {
     async fetchPosts() {
       try {
-        const response = await axios.get('https://3000-malekjbir-nestproject-gjqj2p1lu2x.ws-eu101.gitpod.io/findAllPosts');
-        this.posts = response.data;
+        console.log('aaaaaaa');
+        const data = await apiService.post.postControllerFindAll.then((response) => {
+          console.log('aaaaaaa', response?.data);
+          // this.posts = response?.data
+        })
+        console.log('data', data);
       } catch (error) {
         this.error = error.message;
       }
     },
   },
-  mounted() {
-    this.fetchPosts();
+  async mounted() {
+    await this.fetchPosts();
   },
 };
 </script>
