@@ -1,3 +1,9 @@
+
+# example .gitpod.yml from https://github.com/gitpod-io/demo-multi-repo-frontend
+additionalRepositories:
+    - url: https://github.com/malekjbir/nest-project.git
+      # checkoutLocation is relative to /workspaces
+      checkoutLocation: backend
 tasks:
   - name: frontend
     command: 
@@ -6,4 +12,17 @@ tasks:
       echo VITE_MY_URL=$(gp url 3000) >> .env;
       docker-compose up -d --build;
       docker-compose logs -f;
-  
+  - name: backend
+    command: 
+      cd NEST-PROJECT;
+      yarn;
+      docker-compose up -d --build;
+      docker-compose logs -f;
+
+ports:
+  - port: 3000
+    visibility: public
+    onOpen: notify
+  - port: 8000
+    visibility: public
+    onOpen: notify
