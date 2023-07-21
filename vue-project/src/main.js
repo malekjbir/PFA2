@@ -1,18 +1,17 @@
-import './assets/main.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { createApp } from 'vue';
-import App from './App.vue';
-import { createRouter, createWebHashHistory } from 'vue-router'; 
+import ForumComponent from './forum.vue';
+import AppComponent from './App.vue';
+import ProfilComponent from './Profil.vue';
+import { createRouter, createWebHistory } from 'vue-router';
 
-const AppComponent = { template: '<div>App</div>' } 
-const ForumComponent = { template: '<div>Forum</div>' } 
 const routes = [
-  { path: '/', component: AppComponent }, 
-  { path: '/forum', component: ForumComponent}, 
+  { path: '/', component: ProfilComponent },
+  { path: '/forum', component: ForumComponent},
 ];
 
 const router = createRouter({
-  history: createWebHashHistory(),
-  routes,
+ history: createWebHistory(),
+ routes,
 });
-createApp(App).use(router).mount('#app');
+createApp(AppComponent).use(router).mount('#app');
