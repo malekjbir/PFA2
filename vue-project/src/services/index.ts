@@ -2,7 +2,7 @@
 import { Api } from './myApi';
 
 const apiService = new Api({
-    baseUrl: 'https://3000-malekjbir-nestproject-nx4nuzz3lye.ws-eu101.gitpod.io',
+    baseUrl: import.meta.env.VITE_MY_URL,
     baseApiParams: {
         headers: {
             // 'Content-Type': 'application/json',
