@@ -1,32 +1,34 @@
 <template>
   <div class="container mt-4">
+    <div class="d-flex justify-content-end mb-3">
+    <button @click="createPost" class="btn btn-success ms-16"><router-link to="/forum">Create</router-link></button>
+    <router-view></router-view>  
+  </div>
     <table class="table table-bordered">
       <thead>
         <tr>
-          <th>Title</th>
-          <th>Content</th>
-          <th>Published</th>
-          <th>Author ID</th>
-          <th>Actions</th>
+          <th scope="col">Title</th>
+          <th scope="col">Content</th>
+          <th scope="col">Published</th>
+          <th >Author&nbsp;ID</th>
+          <th scope="col">Actions</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="post in posts" :key="post.id">
           <td>{{ post.title }}</td>
-          <td>{{ post.content }}</td>
+          <td >{{ post.content }}</td>
           <td>{{ post.published }}</td>
           <td>{{ post.authorId }}</td>
           <td class="d-flex">
             <button @click="updatePost(post)" class="btn btn-primary">Update</button>
-            <button @click="updatePost(post)" class="btn btn-danger ms-2">Update</button>
-            <button @click="createPost" class="btn btn-success ms-2">Create</button>
+            <button @click="deletePost(post)" class="btn btn-danger ms-2">Delete</button>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
 </template>
-
 <script>
 import service from "./services" 
 export default {
